@@ -1,8 +1,4 @@
-import { Book } from "../types";
-
-interface BookCardProps {
-    volInfo: Book["volumeInfo"];
-}
+import { BookCardProps } from "../../types"
 
 export const BookCard = ({ volInfo }: BookCardProps) => {
    return(
