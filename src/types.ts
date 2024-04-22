@@ -11,8 +11,11 @@ export interface Book {
     };
   }
 
-  export interface BookCardProps {
+export interface BookCardProps {
     volInfo: Book["volumeInfo"];
+}
+export interface BookModalProps {
+  volInfo: Book["volumeInfo"];
 }
 
  export interface InputFieldProps {
