@@ -11,11 +11,14 @@ export interface Book {
     };
   }
 
-export interface BookCardProps {
+  export interface BookCardProps {
+    onCardClick: () => void;
     volInfo: Book["volumeInfo"];
 }
 export interface BookModalProps {
-  volInfo: Book["volumeInfo"];
+  showModal: boolean;
+  closeModal: () => void;
+  volInfo?: Book["volumeInfo"];
 }
 
  export interface InputFieldProps {

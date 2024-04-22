@@ -1,9 +1,7 @@
-import { useState } from "react";
 import { BookCardProps } from "../../types";
-import { BookModal } from "../BookModal/BookModal";
 
-export const BookCard = ({ volInfo }: BookCardProps) => {
-    const [showModal, setShowModal] = useState(false);
+
+export const BookCard = ( {volInfo, onCardClick} : BookCardProps ) => {
 
     return (
         <>
@@ -21,9 +19,7 @@ export const BookCard = ({ volInfo }: BookCardProps) => {
             <li>
                 <p>{volInfo.description}</p>
             </li>
-            <button onClick={() => setShowModal(!showModal)}>Visa info</button>
-
-            {showModal ? <BookModal volInfo={volInfo} /> : null }
+            <button onClick={onCardClick}>Open Modal</button>
         </>
     );
 };
