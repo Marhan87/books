@@ -4,6 +4,7 @@ import { Book } from "../../types";
 import { InputField } from "../InputField/InputField";
 import { BookCard } from "../BookCard/BookCard";
 import { Modal } from "../BookModal/Modal";
+import ErrorBoundary from "../../utils/errorBoundary";
 
 export const BookSearch = () => {
     const getBooks = useGetBooks();
@@ -47,13 +48,15 @@ export const BookSearch = () => {
             <div>
                 <h2>Search Results:</h2>
                 {loading ? <img src="./src/assets/loading.gif" /> : null}
-                <div>
-                    {books.map((book) => (
-                        <BookCard key={book.id} volInfo={book.volumeInfo} onCardClick={() => openModal(book)} />
-                    ))}
+                <ErrorBoundary>
+                    <div>
+                        {books.map((book) => (
+                            <BookCard key={book.id} volInfo={book.volumeInfo} onCardClick={() => openModal(book)} />
+                        ))}
 
-                    <Modal showModal={showModal} closeModal={closeModal} volInfo={modalContent?.volumeInfo} />
-                </div>
+                        <Modal showModal={showModal} closeModal={closeModal} volInfo={modalContent?.volumeInfo} />
+                    </div>
+                </ErrorBoundary>
             </div>
         </>
     );

@@ -1,7 +1,7 @@
 export const Footer = () => {
     return(
-        <header>
-            <h1>Here is the Footer</h1>
-        </header>
+        <footer>
+            <p>Martin Hansson coding, all rights reserved and so on.</p>
+        </footer>
     )
 }

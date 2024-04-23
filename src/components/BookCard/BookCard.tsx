@@ -2,7 +2,9 @@ import { BookCardProps } from "../../types";
 
 
 export const BookCard = ( {volInfo, onCardClick} : BookCardProps ) => {
-
+    if (!volInfo) {
+        return null;
+    }
     return (
         <>
             <li>{volInfo.title}</li>

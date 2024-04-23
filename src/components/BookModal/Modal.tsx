@@ -1,6 +1,11 @@
 import { BookModalProps } from "../../types";
 
 export const Modal = ({ showModal, closeModal, volInfo } : BookModalProps) => {
+
+  if (!volInfo) {
+    return null; // Return null if volInfo is undefined
+  }
+
     return (
       <div className={`modal ${showModal ? 'show' : ''}`}>
         <div className="modal-content">

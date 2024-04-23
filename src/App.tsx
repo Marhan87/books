@@ -1,4 +1,3 @@
-import './App.css'
 import { Body } from './layout/Body'
 import { Footer } from './layout/Footer'
 import { Header } from './layout/Header'
