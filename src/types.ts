@@ -3,13 +3,13 @@ import { ReactNode } from "react";
 export interface Book {
     id: string;
     volumeInfo?: {
-      title?: string;
+      title: string;
       description?: string;
       imageLinks?: {
         smallThumbnail?: string,
-        largeThumbnail?: string
+        thumbnail?: string
       }
-      authors?: [string]
+      authors: [string]
     };
   }
 
@@ -24,6 +24,7 @@ export interface BookModalProps {
 }
 
  export interface InputFieldProps {
+  onClick: () => void;
   onChange: React.ChangeEventHandler<HTMLInputElement>;
   searchPhrase: string;
   placeHolder: string;

@@ -2,23 +2,29 @@ body{
     display: flex;
     flex-direction: column;
 }
-
+h1{
+    margin: unset;
+}
 header{
     background-color: #efefef;
-    width: 100%;
     box-shadow: 0px 3px 5px 0px rgba(171,171,171,0.75);
     -webkit-box-shadow: 0px 3px 5px 0px rgba(171,171,171,0.75);
     -moz-box-shadow: 0px 3px 5px 0px rgba(171,171,171,0.75);
+    padding: 1.5rem 2.5rem;
     h1{
         color: #689191
     }
 }
+main{
+    min-height: 70vh;
+    padding: 2.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
 footer{
-    position: fixed;
     bottom: 0;
     left: 0;
     padding: 2.5rem;
-    width: 100%;
     background-color: #efefef;
-    color: #ccc;
+    color: #6e6e6e;
 }

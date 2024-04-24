@@ -1,0 +1,46 @@
+.inputContainer {
+    position: relative;
+    margin-bottom: 2rem;
+}
+
+.inputField {
+    width: 75%;
+    padding: 0.5rem;
+    font-size: 1rem;
+    border: 0.18rem solid #ccc;
+    border-radius: 0.5rem;
+    transition: border-color 0.3s ease;
+    @media screen and (max-width: 768px) {
+        width: calc(100% - 20px);
+    }
+}
+
+.inputField:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.inputField::placeholder {
+    color: #999;
+}
+
+.searchButton {
+    padding: 0.5rem 1.5rem;
+    font-size: 1rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 0.5rem;
+    margin-left: 1.5rem;
+    cursor: pointer;
+    @media screen and (max-width: 768px) {
+        width: 100%;
+        margin-top: 10px;
+        margin-left: 0;
+    }
+}
+
+.searchButton:hover {
+    background-color: #0056b3;
+}

@@ -1,4 +1,5 @@
 import { BookCardProps } from "../../types";
+import styles from "./BookCard.module.scss";
 
 
 export const BookCard = ( {volInfo, onCardClick} : BookCardProps ) => {
@@ -6,22 +7,17 @@ export const BookCard = ( {volInfo, onCardClick} : BookCardProps ) => {
         return null;
     }
     return (
-        <>
-            <li>{volInfo.title}</li>
-            <li>
-                {volInfo.imageLinks && volInfo.imageLinks.smallThumbnail ? (
-                    <img src={volInfo.imageLinks.smallThumbnail} alt={volInfo.title} />
+        <div className={styles.bookCard}>
+            <div className={styles.imageHolder}>
+                {volInfo.imageLinks && volInfo.imageLinks.thumbnail ? (
+                    <img src={volInfo.imageLinks.thumbnail} alt={volInfo.title} />
                 ) : null}
-            </li>
-            <li>
-                {volInfo.authors.map((author: string) => (
-                    <span key={author}>{author} </span>
-                ))}
-            </li>
-            <li>
-                <p>{volInfo.description}</p>
-            </li>
-            <button onClick={onCardClick}>Open Modal</button>
-        </>
+            </div>
+            <h5>{volInfo.title}</h5>
+
+            <span>{ volInfo.authors[0]} {volInfo.authors.length > 1 ? "m.fl." : "" }</span>
+
+            <button className={styles.cardButton} onClick={onCardClick}>Info</button>
+        </div>
     );
 };

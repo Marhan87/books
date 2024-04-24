@@ -5,6 +5,7 @@ import { InputField } from "../InputField/InputField";
 import { BookCard } from "../BookCard/BookCard";
 import { Modal } from "../BookModal/Modal";
 import ErrorBoundary from "../../utils/errorBoundary";
+import styles from "./BookSearch.module.scss"
 
 export const BookSearch = () => {
     const getBooks = useGetBooks();
@@ -42,14 +43,13 @@ export const BookSearch = () => {
     return (
         <>
             <label htmlFor="searchInput">Search Books: </label>
-            <InputField onChange={onChange} searchPhrase={searchPhrase} placeHolder="Enter book title" />
-            <button onClick={bookSearch}>Search</button>
+            <InputField onClick={bookSearch} onChange={onChange} searchPhrase={searchPhrase} placeHolder="Enter book title" />
 
             <div>
                 <h2>Search Results:</h2>
                 {loading ? <img src="./src/assets/loading.gif" /> : null}
                 <ErrorBoundary>
-                    <div>
+                    <div className={styles.booksContainer}>
                         {books.map((book) => (
                             <BookCard key={book.id} volInfo={book.volumeInfo} onCardClick={() => openModal(book)} />
                         ))}

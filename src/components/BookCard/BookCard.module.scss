@@ -1,0 +1,39 @@
+.bookCard{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;  
+    justify-content: space-between;
+    &:hover {
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+        transition: all 0.3s ease-in-out;
+    }
+    h5 {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+    .imageHolder{
+        height: 200px;
+        text-align: center;
+        img {
+            max-width: 150px;
+            height: auto;
+        }
+    }
+    button{
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        align-self: flex-end;
+        &:hover{
+            background-color: #0056b3;
+            transition: all 0.3s ease-in-out;
+        }
+    }
+}

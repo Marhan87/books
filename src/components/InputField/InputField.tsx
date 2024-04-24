@@ -1,12 +1,19 @@
 import { InputFieldProps } from "../../types"
+import styles from "./InputField.module.scss"
 
 
-export const InputField: React.FC<InputFieldProps> = ({ onChange, searchPhrase, placeHolder }) => {
+export const InputField = ({ onClick, onChange, searchPhrase, placeHolder }: InputFieldProps) => {
     return(
-        <input type="text"
+
+    <div className={styles.inputContainer}>
+      <input 
+        className={styles.inputField} 
+        type="text"
         id="searchInput"
         onChange={onChange}
         value={searchPhrase}
-        placeholder={placeHolder}></input>
+        placeholder={placeHolder} />
+      <button onClick={onClick} className={styles.searchButton}>Search</button>
+    </div>
     )
 }
