@@ -80,19 +80,19 @@ export const BookSearch = () => {
             <h2><label htmlFor="searchInput">Search Books: </label></h2>
             <InputField onClick={onClick} onChange={onChange} searchPhrase={searchPhrase} placeHolder="Enter book title" />
 
-            <div className={styles.bookSearchContainer}>
+            <section className={styles.bookSearchContainer}>
                 <div className={styles.bookSearchHeader}>
                 <h3>Search Results:</h3>
 
                     <div className={styles.sortBy}>
-                        <span>Sort by:</span>
-                        <select value={sortBy} onChange={(e) => sortBooks(e.target.value)}>
+                        <label htmlFor="sortBy">Sort by:</label>
+                        <select name="sortBy" value={sortBy} onChange={(e) => sortBooks(e.target.value)}>
                             <option value="title">Title</option>
                             <option value="author">Author</option>
                         </select>
                     </div>
                 </div>
-                {loading ? <img className={styles.loadingImage} width="150" src="./src/assets/loading.gif" /> : null}
+                {loading ? <img alt="loading image" className={styles.loadingImage} width="150" src="./src/assets/loading.gif" /> : null}
                 <ErrorBoundary key={errorBoundaryKey}>
                     <div className={styles.booksContainer}>
                         {books.map((book) => (
@@ -102,7 +102,7 @@ export const BookSearch = () => {
                     </div>
                 </ErrorBoundary>
                 
-            </div>
+            </section>
         </>
     );
 };
