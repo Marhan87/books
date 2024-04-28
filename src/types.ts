@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 
 export interface Book {
     id: string;
-    volumeInfo?: {
+    volumeInfo: {
       title: string;
       description?: string;
       imageLinks?: {

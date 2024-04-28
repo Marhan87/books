@@ -10,7 +10,7 @@
     border: 0.18rem solid #ccc;
     border-radius: 0.5rem;
     transition: border-color 0.3s ease;
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 576px) {
         width: calc(100% - 20px);
     }
 }
@@ -34,7 +34,7 @@
     border-radius: 0.5rem;
     margin-left: 1.5rem;
     cursor: pointer;
-    @media screen and (max-width: 768px) {
+    @media screen and (max-width: 576px) {
         width: 100%;
         margin-top: 10px;
         margin-left: 0;

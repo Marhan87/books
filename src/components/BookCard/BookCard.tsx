@@ -7,7 +7,7 @@ export const BookCard = ( {volInfo, onCardClick} : BookCardProps ) => {
         return null;
     }
     return (
-        <div className={styles.bookCard}>
+        <div onClick={onCardClick} className={styles.bookCard}>
             <div className={styles.imageHolder}>
                 {volInfo.imageLinks && volInfo.imageLinks.thumbnail ? (
                     <img src={volInfo.imageLinks.thumbnail} alt={volInfo.title} />
@@ -16,8 +16,6 @@ export const BookCard = ( {volInfo, onCardClick} : BookCardProps ) => {
             <h5>{volInfo.title}</h5>
 
             <span>{ volInfo.authors[0]} {volInfo.authors.length > 1 ? "m.fl." : "" }</span>
-
-            <button className={styles.cardButton} onClick={onCardClick}>Info</button>
         </div>
     );
 };
