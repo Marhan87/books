@@ -11,7 +11,7 @@ export const BookCard = ( {volInfo, onCardClick} : BookCardProps ) => {
             <div className={styles.imageHolder}>
                 {volInfo.imageLinks && volInfo.imageLinks.thumbnail ? (
                     <img src={volInfo.imageLinks.thumbnail} alt={volInfo.title} />
-                ) : null}
+                ) : <img src="./src/assets/placeholder.png" width="150" alt="placeholder image" />}
             </div>
             <h5>{volInfo.title}</h5>
 

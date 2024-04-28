@@ -11,7 +11,8 @@ export const Modal = ({ closeModal, volInfo } : BookModalProps) => {
       <div className={styles.modal}>
         <div className={styles.modalContent}>
           <span className={styles.close} onClick={closeModal}>&times;</span>
-          <img alt={volInfo.title} src={volInfo.imageLinks?.thumbnail} />
+          {volInfo.imageLinks?.thumbnail ? <img alt={volInfo.title} src={volInfo.imageLinks?.thumbnail} /> 
+          : <img src="./src/assets/placeholder.png" width="150" alt="placeholder image" />}
           <h2>{volInfo?.title}</h2>
           {volInfo.authors?.map((author: string) => (
                 <span className={styles.author} key={author}>{author}</span>
