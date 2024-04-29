@@ -13,9 +13,9 @@ export const BookCard = ( {volInfo, onCardClick} : BookCardProps ) => {
                     <img src={volInfo.imageLinks.thumbnail} alt={volInfo.title} />
                 ) : <img src="./src/assets/placeholder.png" width="150" alt="placeholder image" />}
             </div>
-            <h5>{volInfo.title}</h5>
+            {volInfo.title ? <h5>{volInfo.title}</h5> : null }
 
-            <span>{ volInfo.authors[0]} {volInfo.authors.length > 1 ? "m.fl." : "" }</span>
+            {volInfo.authors ? <span>{ volInfo.authors[0]} {volInfo.authors.length > 1 ? "m.fl." : "" }</span> : null }
         </div>
     );
 };

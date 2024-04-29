@@ -6,6 +6,7 @@ import { BookCard } from "../BookCard/BookCard";
 import { Modal } from "../BookModal/Modal";
 import ErrorBoundary from "../../utils/errorBoundary";
 import styles from "./BookSearch.module.scss";
+import Pagination from "../pagination/Pagination";
 
 export const BookSearch = () => {
     const getBooks = useGetBooks();
@@ -14,38 +15,39 @@ export const BookSearch = () => {
     const [modalContent, setModalContent] = useState<Book | null>(null);
     const [loading, setLoading] = useState(false);
     const [searchPhrase, setSearchPhrase] = useState('');
+    const [previousSearchPhrase, setPreviousSearchPhrase] = useState('')
     const [errorBoundaryKey, setErrorBoundaryKey] = useState(0);
-    const [sortBy, setSortBy] = useState<string>('title');
+    const [sortBy, setSortBy] = useState('title');
+    const [totalPages, setTotalPages] = useState(0);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [error, setError] = useState<string | null>(null);
 
-    const bookSearch = useCallback(async () => {
+    const bookSearch = useCallback(async (searchPhrase: string, startIndex: number) => {
         setBooks([]);
         setLoading(true);
-        const data = await getBooks(searchPhrase);
+        const data = await getBooks(searchPhrase, startIndex);
         if (data) {
             const books = data.items;
-
-            let sortedBooks = [...books];
-            if (sortBy === 'title' ) {
-                sortedBooks = sortedBooks.sort((a:Book, b:Book) => a.volumeInfo.title.localeCompare(b.volumeInfo.title));
-            } else if (sortBy === 'author') {
-                sortedBooks = sortedBooks.sort((a:Book, b:Book) => {
-                    const authorA = a.volumeInfo.authors.join(', ');
-                    const authorB = b.volumeInfo.authors.join(', ');
-                    return authorA.localeCompare(authorB);
-                });
-            }
-            setBooks(sortedBooks);
+            setTotalPages(Math.floor((data.totalItems / 10) - 1))
+            sortBooks(sortBy, books)
             setLoading(false);
             setErrorBoundaryKey((prevKey) => prevKey + 1);
         }
-    }, [getBooks, searchPhrase, sortBy]);
+    }, [getBooks, sortBy]);
 
     const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchPhrase(event.target.value);
     };
 
     const onClick = () => {
-        bookSearch();
+        if (!searchPhrase) {
+            setError("Please enter a search term.");
+        } else {
+            setError(null); 
+            bookSearch(searchPhrase, 1);
+            setPreviousSearchPhrase(searchPhrase);
+            setCurrentPage(1);
+        }
     };
 
     const openModal = (book: Book) => {
@@ -58,20 +60,34 @@ export const BookSearch = () => {
         setModalContent(null);
     };
 
-    const sortBooks = (value: string) => {
+    const nextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+            bookSearch(previousSearchPhrase, Math.floor(currentPage * 10))
+        }
+    };
 
-            setSortBy(value)
-            let sortedBooks = [...books];
-            if (value === 'title' ) {
-                sortedBooks = sortedBooks.sort((a:Book, b:Book) => a.volumeInfo.title.localeCompare(b.volumeInfo.title));
-            } else if (value === 'author') {
-                sortedBooks = sortedBooks.sort((a:Book, b:Book) => {
-                    const authorA = a.volumeInfo.authors.join(', ');
-                    const authorB = b.volumeInfo.authors.join(', ');
-                    return authorA.localeCompare(authorB);
-                });
-            }
-            setBooks(sortedBooks);
+    const prevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+            bookSearch(previousSearchPhrase, Math.floor((currentPage - 1) / 10))
+        }
+    };
+
+    const sortBooks = (value: string, books: Book[]) => {
+
+        setSortBy(value)
+        let sortedBooks = [...books];
+        if (value === 'title' ) {
+            sortedBooks = sortedBooks.sort((a:Book, b:Book) => a.volumeInfo.title.localeCompare(b.volumeInfo.title));
+        } else if (value === 'author') {
+            sortedBooks = sortedBooks.sort((a:Book, b:Book) => {
+                const authorA = a.volumeInfo.authors.join(', ');
+                const authorB = b.volumeInfo.authors.join(', ');
+                return authorA.localeCompare(authorB);
+            });
+        }
+        setBooks(sortedBooks);
     }
     
 
@@ -83,10 +99,10 @@ export const BookSearch = () => {
             <section className={styles.bookSearchContainer}>
                 <div className={styles.bookSearchHeader}>
                 <h3>Search Results:</h3>
-
+                    {error && <div className={styles.error}>{error}</div>}
                     <div className={styles.sortBy}>
                         <label htmlFor="sortBy">Sort by:</label>
-                        <select name="sortBy" value={sortBy} onChange={(e) => sortBooks(e.target.value)}>
+                        <select name="sortBy" value={sortBy} onChange={(e) => sortBooks(e.target.value, books)}>
                             <option value="title">Title</option>
                             <option value="author">Author</option>
                         </select>
@@ -100,6 +116,14 @@ export const BookSearch = () => {
                         ))}
                         <Modal showModal={showModal} closeModal={closeModal} volInfo={modalContent?.volumeInfo} />
                     </div>
+                    {books.length > 0 ?
+                        <Pagination
+                            currentPage={currentPage}
+                            totalPages={totalPages}
+                            onNextPage={nextPage}
+                            onPrevPage={prevPage}
+                        />
+                        : null}
                 </ErrorBoundary>
                 
             </section>

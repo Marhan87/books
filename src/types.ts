@@ -37,3 +37,10 @@ export interface ErrorBoundaryState {
 export interface ErrorBoundaryProps {
   children: ReactNode;
 }
+
+export interface PaginationProps {
+  currentPage: number;
+  totalPages: number;
+  onNextPage: () => void;
+  onPrevPage: () => void;
+}

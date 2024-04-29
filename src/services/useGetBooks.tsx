@@ -2,9 +2,9 @@ import { useCallback } from "react";
 import { API_KEY } from "./API-key";
 
 export const useGetBooks = () => {
-    const getBooks = useCallback(async (searchTerm: string) => {
+    const getBooks = useCallback(async (searchTerm: string, startIndex: number) => {
         try {
-            const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&key=${API_KEY}`);
+            const response = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}&maxResults=10&startIndex=${startIndex}&key=${API_KEY}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);
             }
